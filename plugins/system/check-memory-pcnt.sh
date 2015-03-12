@@ -13,6 +13,8 @@
 # Modified: Mario Harvey - Zumetrics
 # Date: 2015-01-10
 # Modified Ollie Armstrong <ollie@armstrong.io>
+# Date: 2015-03-11
+# Modified Joe Hofeditz <jhofeditz@serverduo.com>
 
 # get arguments
 
@@ -50,7 +52,7 @@ TotalMem=$(free -m | grep Mem | awk '{ print $2 }')
 #Determine amount of free memory on the machine
 FreeMem=$(free -m | grep buffers/cache | awk '{ print $4 }')
 #Get percentage of free memory
-FreePer=$(echo "scale=3; $FreeMem / $TotalMem * 100" | bc -l| cut -d "." -f1)
+FreePer=$(echo "scale=3; $FreeMem / $TotalMem * 100" | bc -l| xargs printf "%0.f")
 #Get actual memory usage percentage by subtracting free memory percentage from 100
 UsedPer=$((100-$FreePer))
 
